@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+ <robot name="jerry">
+
+ <material name="clr_1">
+ <color rgba="1 0.8 0 0.8" />
+ </material>
+ <material name="green">
+ <color rgba="0 1 0 0.8" />
+ </material>
+  <material name="blue">
+ <color rgba="0 0 1 0.8" />
+ </material>
+
+<material name="clr_3">
+ <color rgba="1 0 1 0.8" />
+ </material>
+
+ <link name="base_link" />
+     <link name="base">
+         <visual>
+             <geometry>
+           <!-- <box size="0.1 0.1 -1" /> -->
+               <mesh filename="untitled.stl"/>
+               </geometry>
+             <origin xyz="0 0 -1" />
+             <material name="clr_3" />
+         </visual>
+      </link>
+
+ 
+     <link name="link0">
+         <visual>
+             <geometry>
+              <!-- <box size="0.1 0.1 -1" /> -->
+               <mesh filename="final_direk_final.stl"/>
+               </geometry>
+             <origin xyz="0 0 -1" />
+             <material name="blue" />
+         </visual>
+      </link>
+
+     <link name="link1">
+         <visual>
+             <geometry>
+             <box size="1 0.1 0.1"  />
+             </geometry>
+             <origin xyz="0.5 0 0" />
+             <material name="clr_1" />
+         </visual>
+      </link>
+
+ <link name="link2">
+     <visual>
+         <geometry>
+         <box size="0.5 0.1 0.1" />
+         </geometry>
+         <origin xyz="0.5 0 0" />
+         <material name="green" />
+     </visual>
+ </link>
+
+ <link name="end">
+     <visual>
+         <geometry>
+         <cylinder radius = "0.05" length="0.2" />
+         </geometry>
+         <origin xyz="0.25 0 0" />
+     </visual>
+ </link>
+
+<joint name="base_q" type="continuous">
+     <parent link="base_link" />
+     <child link="base" />
+     <axis xyz="0 0 -1" />
+ </joint>
+
+ <joint name="q0" type="continuous">
+     <parent link="base" />
+     <child link="link0" />
+     <axis xyz="0 0 -1" />
+ </joint>
+
+ <joint name="q1" type="continuous">
+ <parent link="link0" />
+ <child link="link1" />
+ <axis xyz="0 -1 1" />
+ </joint>
+
+ <joint name="q2" type="prismatic">
+     <parent link="link1" />
+     <child link="link2" />
+     <origin xyz="0.5 0 0" rpy="1.5708 0 0"/>
+     <limit effort="30" velocity="1.0" lower="-2.2" upper="0.7" />
+     <axis xyz="1 0 0" />
+ </joint>
+
+ <joint name="notajoint" type="fixed">
+     <parent link="link2" />
+     <child link="end" />
+     <origin xyz="0.5 0 0" />
+ </joint>
+
+ </robot>
